@@ -62,7 +62,8 @@ function! s:MisakaOpen()
         let g:misaka_py_loaded = 1 "python2 loaded!
     endif
 
-    exe "vnew" 
+    "exe "vnew"  create a __Misaka__ buffer
+    exe "vnew __Misaka__"
     python HelloMisaka()
 endfunction
 
@@ -76,16 +77,10 @@ function! s:MisakaGoToWindowForBufferName(name)
 endfunction
 
 function! s:ByeMisaka()
-    if s:GundoGoToWindowForBufferName('__Gundo__')
+    if s:MisakaGoToWindowForBufferName('__Misaka__')
         quit
     endif
     exe bufwinnr(g:misaka_target_n) . "wincmd w"
-endfunction
-
-function! s:HelloMisaka()
-    if s:has_supported_python == 1
-        python HelloMisaka()
-    endif
 endfunction
 
 " misaka buffer setting
@@ -94,21 +89,22 @@ function! s:Tokyo()
     setlocal bufhidden=hide     "hide the buffer (don't unload it), also when 'hidden' is not set
     setlocal noswapfile         "it will be loaded without creating a swapfile
     setlocal nobuflisted        "the buffer will not shows up in the buffer list
-    setlocal nomodifiable       "the buffer can not be modified
+    "setlocal nomodifiable       "the buffer can not be modified
+    setlocal modifiable
     setlocal filetype=misaka    "misaka filetype:)
     setlocal nolist             "no list mode
     setlocal nonumber           "no line number
     setlocal norelativenumber   "no relative line number
     setlocal nowrap             "no line wrap
-    call s:TokyoMapGraph()
+"   call s:TokyoMapGraph()
 endfunction
 
-function! s:TokyoMapGraph()
-    nnoremap <script> <silent> <buffer> P             :call <sid>HelloMisaka()<CR>
-    nnoremap <script> <silent> <buffer> q             :call <sid>ByeMisaka()<CR>
-    cabbrev  <script> <silent> <buffer> q             :call <sid>ByeMisaka()
-    cabbrev  <script> <silent> <buffer> quit          :call <sid>ByeMisaka()
-endfunction
+" function! s:TokyoMapGraph()
+"     nnoremap <script> <silent> <buffer> P             :call <sid>HelloMisaka()<CR>
+"     nnoremap <script> <silent> <buffer> q             :call <sid>ByeMisaka()<CR>
+"     cabbrev  <script> <silent> <buffer> q             :call <sid>ByeMisaka()
+"     cabbrev  <script> <silent> <buffer> quit          :call <sid>ByeMisaka()
+" endfunction
 
 function! s:MisakaIsVisible()
     if bufwinnr(bufnr("__Misaka__")) != -1
@@ -119,16 +115,13 @@ function! s:MisakaIsVisible()
 endfunction
 
 function! misaka#MisakaToggle()
-    " if s:MisakaIsVisible()
-    "     call s:ByeMisaka()
-    " else
-    "     let g:misaka_target_n = bufnr('')
-    "     let g:misaka_target_f = @%
-    "     call s:MisakaOpen()
-    " endif
-    let g:misaka_target_n = bufnr('')
-    let g:misaka_target_f = @%
-    call s:MisakaOpen()
+    if s:MisakaIsVisible()
+        call s:ByeMisaka()
+    else
+        let g:misaka_target_n = bufnr('')
+        let g:misaka_target_f = @%
+        call s:MisakaOpen()
+    endif
 endfunction
 
 augroup MisakaAug
