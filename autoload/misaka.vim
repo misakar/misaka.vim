@@ -62,8 +62,8 @@ function! s:MisakaOpen()
         let g:misaka_py_loaded = 1 "python2 loaded!
     endif
 
-    "exe "vnew"  create a __Misaka__ buffer
     exe "vnew __Misaka__"
+    exe "vertical resize " . g:misaka_width
     python HelloMisaka()
 endfunction
 
@@ -96,15 +96,7 @@ function! s:Tokyo()
     setlocal nonumber           "no line number
     setlocal norelativenumber   "no relative line number
     setlocal nowrap             "no line wrap
-"   call s:TokyoMapGraph()
 endfunction
-
-" function! s:TokyoMapGraph()
-"     nnoremap <script> <silent> <buffer> P             :call <sid>HelloMisaka()<CR>
-"     nnoremap <script> <silent> <buffer> q             :call <sid>ByeMisaka()<CR>
-"     cabbrev  <script> <silent> <buffer> q             :call <sid>ByeMisaka()
-"     cabbrev  <script> <silent> <buffer> quit          :call <sid>ByeMisaka()
-" endfunction
 
 function! s:MisakaIsVisible()
     if bufwinnr(bufnr("__Misaka__")) != -1

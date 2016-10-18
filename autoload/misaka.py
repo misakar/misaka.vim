@@ -9,4 +9,5 @@ def initPythonModule():
 def HelloMisaka():
     """echo hello misaka in new buffer"""
     cb = vim.current.buffer
-    cb.append("hello misaka!")
+    # cb.append("hello misaka!")
+    cb[0] = "hello misaka!"
