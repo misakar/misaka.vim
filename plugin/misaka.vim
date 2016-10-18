@@ -1,5 +1,15 @@
-function! HelloMisaka()
-    echo "Hello Misaka"
+" ``````````````````````````````
+"  ██╗   ██╗██╗███╗   ███╗
+"  ██║   ██║██║████╗ ████║
+"  ██║   ██║██║██╔████╔██║
+"  ╚██╗ ██╔╝██║██║╚██╔╝██║
+"   ╚████╔╝ ██║██║ ╚═╝ ██║
+"    ╚═══╝  ╚═╝╚═╝     ╚═╝
+"                         
+"   learn viml the love way:)
+"
+" ``````````````````````````````
 
-endfunction
-command! -nargs=0 HelloMisaka call HelloMisaka()
+let loaded_misaka = 1
+
+command! -nargs=0 MisakaToggle call misaka#MisakaToggle()
