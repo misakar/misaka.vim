@@ -61,6 +61,9 @@ function! s:MisakaOpen()
 
         let g:misaka_py_loaded = 1 "python2 loaded!
     endif
+
+    exe "vnew" 
+    python HelloMisaka()
 endfunction
 
 function! s:MisakaGoToWindowForBufferName(name)
@@ -115,7 +118,7 @@ function! s:MisakaIsVisible()
     endif
 endfunction
 
-function! s:MisakaToggle()
+function! misaka#MisakaToggle()
     " if s:MisakaIsVisible()
     "     call s:ByeMisaka()
     " else
@@ -123,7 +126,9 @@ function! s:MisakaToggle()
     "     let g:misaka_target_f = @%
     "     call s:MisakaOpen()
     " endif
-    echo "hello misaka!"
+    let g:misaka_target_n = bufnr('')
+    let g:misaka_target_f = @%
+    call s:MisakaOpen()
 endfunction
 
 augroup MisakaAug
