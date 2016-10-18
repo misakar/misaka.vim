@@ -116,13 +116,14 @@ function! s:MisakaIsVisible()
 endfunction
 
 function! s:MisakaToggle()
-    if s:MisakaIsVisible()
-        call s:ByeMisaka()
-    else
-        let g:misaka_target_n = bufnr('')
-        let g:misaka_target_f = @%
-        call s:MisakaOpen()
-    endif
+    " if s:MisakaIsVisible()
+    "     call s:ByeMisaka()
+    " else
+    "     let g:misaka_target_n = bufnr('')
+    "     let g:misaka_target_f = @%
+    "     call s:MisakaOpen()
+    " endif
+    echo "hello misaka!"
 endfunction
 
 augroup MisakaAug
